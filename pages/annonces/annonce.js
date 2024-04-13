@@ -1,8 +1,8 @@
 let card= document.querySelector('main');
 async function getAllListings() {
-    let apiCall = await fetch('http://localhost:3000/annonces')
+    let apiCall = await fetch('http://localhost:3333/annonces')
     let response = await apiCall.json()
-    let jwt= localStorage.getItem('jwt')
+    let userId= localStorage.getItem('userId')
    
 
     response.forEach((annonce) => {
@@ -17,20 +17,33 @@ async function getAllListings() {
            <p>${annonce.lieu}</p>
            <p>${annonce.date}</p>
            </div>
-           <div class="button-${annonce._id}"></div>
            
-           ${annonce.userId === jwt ?`<div class='absolute -bottom-6  right-0'> <button onclick="deleteAnnonce()"><i class="fa-solid fa-trash text-sm text-blue-500"></i></button>
-           <button onclick="deleteAnnonce()"><i class="fa-solid fa-pen text-sm text-red-600"></i></button></div>`:"" }
+           
+           ${annonce.userId === userId ?`<div class='absolute -bottom-6 right-0 '> <button onclick="deleteAnnonce('${annonce._id}')"><i class="fa-solid fa-trash text-sm text-blue-500"></i></button>
+           <button onclick="updateAnnonce('${annonce._id}')"><i class="fa-solid fa-pen text-sm text-red-600"></i></button></div>`:"" }
            </div>
            `
-        //    if(annonce.userId === jwt){
-        //     let btn =document.querySelector(`.button-${annonce._id}`)
-        //     btn.innerHTML += ` <button onclick="deleteAnnonce()"><i class="fa-solid fa-trash"></i></button>
-        //     <button onclick="deleteAnnonce()"><i class="fa-solid fa-pen"></i></button>`
-        //     card.appendChild(btn)
-        //    }
+    //       if(annonce.userId === userId){
+    //     card.innerHTML += `<div class='absolute -bottom-6 right-0'> <button onclick="deleteAnnonce(${annonce._id})"><i class="fa-solid fa-trash text-sm text-blue-500"></i></button>
+    //        <button onclick="updateAnnonce('${annonce._id}')"><i class="fa-solid fa-pen text-sm text-red-600"></i></button></div>`
+                
+    //    }
          
     })
 }
 
 getAllListings()
+
+async function deleteAnnonce(id){
+    let request = {
+        method: 'DELETE',
+        headers: {
+            'Content-type': 'application/json; charset=utf-8',
+        },
+    }
+    const bdsuppr= await fetch(`http://localhost:3333/suppression/${id}`, request)
+    
+    window.location.reload()
+    
+
+}

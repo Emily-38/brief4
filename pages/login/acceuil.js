@@ -15,11 +15,12 @@ async function connexion() {
         body: JSON.stringify(user),
     }
 
-    let apiRequest = fetch('http://localhost:3000/login', request)
+    let apiRequest = fetch('http://localhost:3333/login', request)
     let response = await apiRequest
     if (response.status === 200) {
         const data = await response.json()
         window.localStorage.setItem('jwt', data.jwt)
+        window.localStorage.setItem('userId', data.id)
 
         setTimeout(() => {
             window.location.href = '../annonces/annonce.html'

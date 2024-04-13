@@ -18,7 +18,7 @@ let request = {
     },
     body: JSON.stringify(user),
 }
-    let apiRequest = await fetch('http://localhost:3000/register', request)
+    let apiRequest = await fetch('http://localhost:3333/register', request)
     let response = await apiRequest
 
     if (response.status === 200) {

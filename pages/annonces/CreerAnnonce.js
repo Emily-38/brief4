@@ -4,7 +4,7 @@ async function createAnnonce() {
     let image= document.querySelector('#image').value
     let lieu = document.querySelector('#lieu').value
     let date = document.querySelector('#date').value
-    let userId = window.localStorage.getItem('jwt')
+     let userId = window.localStorage.getItem('userId')
     
     let annonce = {
         title: title,
@@ -23,7 +23,7 @@ async function createAnnonce() {
         body: JSON.stringify(annonce),
     }
 
-    let apiRequest = fetch('http://localhost:3000/createAnnonce', request)
+    let apiRequest = fetch('http://localhost:3333/createAnnonce', request)
     let response = await apiRequest
    
     if (response.status === 200) {
