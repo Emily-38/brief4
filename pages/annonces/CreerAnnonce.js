@@ -6,7 +6,7 @@ async function createAnnonce() {
     let lieu = document.querySelector('#lieu').value
     let date = document.querySelector('#date').value
     let participantsMax= document.querySelector('#participantsMax').value
-     let userId = window.localStorage.getItem('userId')
+     let jwt = window.localStorage.getItem('jwt')
     
     let annonce = {
         title: title,
@@ -15,7 +15,7 @@ async function createAnnonce() {
         lieu: lieu,
         date: date,
         participantsMax: participantsMax,
-        userId:userId,
+        userId:jwt,
 
     }
 
@@ -23,6 +23,7 @@ async function createAnnonce() {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json; charset=utf-8',
+            Authorization: `Bearer ${jwt}`,
         },
         body: JSON.stringify(annonce),
     }

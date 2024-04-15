@@ -25,12 +25,16 @@ annonceById()
 
 async function updateAnnonce(){
 
+const jwt= localStorage.getItem('jwt')
     let title= document.querySelector('#title').value
     let description= document.querySelector('#description').value
     let image= document.querySelector('#image').value
     let lieu= document.querySelector('#lieu').value
     let date= document.querySelector('#date').value
     let participantsMax= document.querySelector('#participantsMax').value
+if(!jwt){
+    console.log('erreur')
+}
 
     let annonce = {
         title: title,
@@ -45,6 +49,7 @@ async function updateAnnonce(){
         method: 'PATCH',
         headers: {
             'Content-type': 'application/json; charset=utf-8',
+            Authorization: `Bearer ${jwt}`,
         },
         body: JSON.stringify(annonce),
     }
@@ -56,7 +61,7 @@ async function updateAnnonce(){
         localStorage.removeItem('annonce')
              window.location.href = 'annonce.html'
         }else{
-            window.location.reload
+            window.location.reload()
         }
     
     
