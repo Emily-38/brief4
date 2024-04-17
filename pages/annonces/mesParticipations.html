@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Annonces</title>
+    <title> Mes participations</title>
 </head>
 <body>
     <header class="flex flex-col items-center m-4">
@@ -13,27 +13,27 @@
 <button onclick="burger()" class=""><i class="w-3/6 fa-solid fa-bars "></i></button>
         <nav class="nav contenaire mx-auto w-9/12  hidden">
             <div class=" flex flex-row gap-4 p-4 items-center w justify-center bg-gray-200 rounded-lg shadow dark:border md:mt-0  xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                <a href="annonce.html">Toutes les annonces</a>
                 <a href="mesAnnonce.html">Mes annonces</a>
-                <a href="mesParticipations.html">Mes participations</a>
                 <button onclick="logout()">Déconnexion</button>
 
             </div>
         </nav>
     
    <main class=" flex flex-col justify-center items-center rounded-md  ">
-    <div class=" m-4 contenaire mx-auto bg-gray-200 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-    <a href="CréeAnnonce.html" class="p-4">Crée une annonce</a>
+    <div class=" m-4contenaire mx-auto bg-gray-200 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+    <a href="CréeAnnonce.html" class="p-4 m-4">Crée une annonce</a>
     </div>
    
     </main> 
     <div class="modale hidden m-4 contenaire mx-auto flex-col text-center w- bg-gray-200 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-       
         
+        <button onclick="backModal()" class="bg-blue-500 p-2 rounded">Retour</button>
     </div>
 </body>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://kit.fontawesome.com/27b15f5b77.js" crossorigin="anonymous"></script>
-<script src="annonce.js"></script>
+<script src="mesParticipations.js"></script>
 
 
 </html>

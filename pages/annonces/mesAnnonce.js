@@ -12,9 +12,11 @@ async function getAllAnnonces() {
    
     response.forEach((annonce) => {
         
+        if(annonce.userId===userId){
+      
         card.innerHTML += `
         <div class="relative w-9/12 px-2 flex flex-row items-center justify-between gap-4  bg-gray-200 rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-        <button onclick="userModale('${annonce._id}')" href="#modale"><img src='${annonce.image}' class='w-32 rounded-md h-32 object-cover' /></button>
+        <button onclick="userModale('${annonce._id}'  href="#modale")"><img src='${annonce.image}' class='w-32 rounded-md h-32 object-cover' /></button>
         <div class="flex flex-col justify-around">
          <h2 class="font-bold">${annonce.title}</h2>
           <p>${annonce.description}</p>
@@ -58,9 +60,9 @@ async function getAllAnnonces() {
                 }    
                 
                 
-           
+          }  
         })
-         
+        
     }
 
 

@@ -11,9 +11,16 @@ async function getAllAnnonces() {
 
    
     response.forEach((annonce) => {
+        console.log(annonce.participants)
+        let User;
+        annonce.participants.forEach((participant)=>{
+            if(participant===userId){User= true}
+            if(User===true){
+
         
+      
         card.innerHTML += `
-        <div class="relative w-9/12 px-2 flex flex-row items-center justify-between gap-4  bg-gray-200 rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <div class="relative w-9/12 px-2 m-4 flex flex-row items-center justify-between gap-4  bg-gray-200 rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:border-gray-700">
         <button onclick="userModale('${annonce._id}')" href="#modale"><img src='${annonce.image}' class='w-32 rounded-md h-32 object-cover' /></button>
         <div class="flex flex-col justify-around">
          <h2 class="font-bold">${annonce.title}</h2>
@@ -53,12 +60,17 @@ async function getAllAnnonces() {
 
              else {
                  card.innerHTML +=`<div class="flex flex-row justify-center items-center mb-10">
-                 <button onclick="ajoutParticipant('${annonce._id}')" class="bg-blue-500 p-2 rounded">Participer</button>
+                 <button onclick="ajoutParticipant('${annonce._id}')  class="bg-blue-500 p-2 rounded">Participer</button>
                  </div>`
                 }    
                 
                 
-           
+          }
+        
+        }) 
+            
+
+        
         })
          
     }
@@ -161,7 +173,7 @@ async function userModale(id){
     
     
         if(id===annonce._id){
-    modale.innerHTML=`<div id=modale class="flex flex-col gap-4 m-4">
+    modale.innerHTML=`<div id=modale class="flex flex-col gap-4 m-8">
     <button onclick="backModal()" class="bg-blue-500 p-2 rounded">Retour</button>
     <h2 class="font-bold">${annonce.title}<h2>
     <p>${annonce.description}<p>
