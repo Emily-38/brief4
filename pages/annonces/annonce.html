@@ -6,28 +6,34 @@
     <title>Annonces</title>
 </head>
 <body>
-    <header class="flex justify-between">
+    <header class="flex flex-col items-center m-4">
     <img src="../../media/Your_Event-removebg-preview.png" alt="logo" class="w-1/6">
-    <h1>Bienvenue!</h1>
+    <h1 class="contenaire mx-auto">Bienvenue!</h1>
 </header>
-    <aside>
-        <nav>
-            <div class="w-1/4 flex flex-col bg-gray-200 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+<button onclick="burger()"><i class="fa-solid fa-bars"></i></button>
+        <nav class="nav contenaire mx-auto w-9/12 hidden">
+            <div class=" flex flex-row gap-4 items-center w justify-center bg-gray-200 rounded-lg shadow dark:border md:mt-0  xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <a>Mes annonces</a>
                 <a>Mes participations</a>
+                <button onclick="logout()">Déconnexion</button>
 
             </div>
         </nav>
-    </aside>
     
-   <main>
-    <div class="w-1/4 flex flex-col bg-gray-200 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+   <main class=" flex flex-col justify-center items-center rounded-md  ">
+    <div class=" m-4 contenaire mx-auto bg-gray-200 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
     <a href="CréeAnnonce.html">Crée une annonce</a>
     </div>
-    
-    </main>
+   
+    </main> 
+    <div class="modale hidden m-4 contenaire mx-auto flex-col text-center w- bg-gray-200 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <h2> Participants </h2>
+        <button onclick="backModal()" class="bg-blue-500 p-2 rounded">Retour</button>
+    </div>
 </body>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://kit.fontawesome.com/27b15f5b77.js" crossorigin="anonymous"></script>
 <script src="annonce.js"></script>
+
+
 </html>

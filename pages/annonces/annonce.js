@@ -13,8 +13,8 @@ async function getAllAnnonces() {
     response.forEach((annonce) => {
         
         card.innerHTML += `
-        <div class="relative container mx-auto  w-full px-2 flex flex-row items-center justify-between gap-x-4 bg-gray-200 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-        <img src='${annonce.image}' class='w-32 rounded-md h-32 object-cover' />
+        <div class="relative w-9/12 px-2 flex flex-row items-center justify-between  bg-gray-200 rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <button onclick="userModale('${annonce._id}')"><img src='${annonce.image}' class='w-32 rounded-md h-32 object-cover' /></button>
         <div class="flex flex-col justify-around">
          <h2>${annonce.title}</h2>
           <p>${annonce.description}</p>
@@ -35,19 +35,19 @@ async function getAllAnnonces() {
            // affichage bouton
            let foundParticipant;
            annonce.participants.forEach((participant)=>{
-                if(participant.id===userId){foundParticipant= true}
+                if(participant===userId){foundParticipant= true}
                 
 
                 })  
                  if(annonce.participants.length  == annonce.participantsMax){
                     card.innerHTML +=`<div class="flex flex-row justify-center items-center mb-10">
-                     <button onclick="" class="bg-blue-500 p-2 rounded">Complet</button>
+                     <button class="bg-blue-500 p-2 rounded ">Complet</button>
                      </div>`
                  } 
                
              else if(foundParticipant === true){
                   card.innerHTML +=`<div class="flex flex-row justify-center items-center mb-10">
-                  <button onclick="deletePaticipant('${annonce._id}')"class="bg-red-600 p-2 rounded">Annuler</button>
+                  <button onclick="deleteParticipant('${annonce._id}')"class="bg-red-600 p-2 rounded">Annuler</button>
                   </div>`
              }
 
@@ -55,7 +55,9 @@ async function getAllAnnonces() {
                  card.innerHTML +=`<div class="flex flex-row justify-center items-center mb-10">
                  <button onclick="ajoutParticipant('${annonce._id}')" class="bg-blue-500 p-2 rounded">Participer</button>
                  </div>`
-                }     
+                }    
+                
+                
            
         })
          
@@ -99,7 +101,33 @@ async function ajoutParticipant(id){
         },
         }
     await fetch(`http://localhost:3333/addParticpant/${id}`, request)
-    window.location.reload()
+    
+    setTimeout(()=>{
+        
+        window.location.reload() 
+    },750)
+   
+}
+async function deleteParticipant(id){
+    const jwt= localStorage.getItem('jwt')
+
+    if(!jwt){
+        console.log('jwt invalide')
+    }
+    let request = {
+        method: 'PATCH',
+        headers: {
+            'Content-type': 'application/json; charset=utf-8',
+            Authorization: `Bearer ${jwt}`,
+        },
+        }
+    await fetch(`http://localhost:3333/deleteParticipant/${id}`, request)
+    console.log(jwt)
+    setTimeout(()=>{
+        
+         window.location.reload() 
+    },750)
+   
 }
 
 // redirection vers update
@@ -110,3 +138,53 @@ function updateAnnonce(id){
 
 
 
+
+let burgerbtn=document.querySelector('.nav')
+async function burger(){
+    burgerbtn.classList.toggle('hidden')
+}
+let modale=document.querySelector('.modale')
+async function userModale(id){
+    modale.classList.remove('hidden');
+    card.classList.add('hidden')
+
+    
+   const apiUser= await fetch('http://localhost:3333/getAllUser')
+   const responseUser= await apiUser.json()
+   console.log(responseUser);
+   const annonce= await fetch(`http://localhost:3333/annonce/${id}`)
+   const responseAnnonce= await annonce.json()
+
+responseAnnonce.participants.forEach(participant => {
+    responseUser.forEach((user)=>{
+        
+        if(participant===user._id){
+           
+          modale.innerHTML +=`
+        
+        <div class="flex flex-row gap-4 m-4">
+         <p>Prenom :  ${user.firstName}</p>
+        <p>Nom : ${user.lastName}</p>
+        
+        </div>
+        `
+        }
+
+    })
+   
+    
+        
+   }); 
+   }
+async function backModal(){
+    card.classList.remove('hidden')
+     modale.classList.add('hidden')
+    window.location.reload()
+   }
+   
+  async function logout(){
+    localStorage.removeItem("jwt")
+    localStorage.removeItem("userId")
+    
+  }
+    
