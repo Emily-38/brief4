@@ -15,7 +15,7 @@ async function createAnnonce() {
         lieu: lieu,
         date: date,
         participantsMax: participantsMax,
-        userId:jwt,
+       
 
     }
 
