@@ -56,7 +56,7 @@ if(!jwt){
 
         const dbUpdate= await fetch(`http://localhost:3333/update/${id}`, request)
         
-        console.log(dbUpdate.status)
+        
        if(dbUpdate.status === 200){
         localStorage.removeItem('annonce')
              window.location.href = 'annonce.html'
